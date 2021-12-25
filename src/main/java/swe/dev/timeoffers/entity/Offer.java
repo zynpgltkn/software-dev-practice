@@ -1,22 +1,29 @@
 package swe.dev.timeoffers.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name="offer")
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="offer_id")
     private Long id;
 
-    private Long creatorUserId;
+
     private String offerTitle;
     private String offerDescription;
     private Integer offerTimeAmount;
     private String geoLocation;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User creatorUser;
+
+    public Offer() {
+    }
 
     public String getOfferTitle() {
         return offerTitle;
@@ -50,15 +57,15 @@ public class Offer {
         this.id = id;
     }
 
-    public Long getCreatorUserId() {
-        return creatorUserId;
-    }
-
-    public void setCreatorUserId(Long creatorUserId) {
-        this.creatorUserId = creatorUserId;
-    }
-
     public String getGeoLocation() {
         return geoLocation;
+    }
+
+    public User getCreatorUser() {
+        return creatorUser;
+    }
+
+    public void setCreatorUser(User creatorUser) {
+        this.creatorUser = creatorUser;
     }
 }

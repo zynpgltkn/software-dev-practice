@@ -1,16 +1,16 @@
 package swe.dev.timeoffers.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
+@Table(name="user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     @NotBlank(message = "First Name is mandatory")
@@ -24,6 +24,9 @@ public class User {
 
     @NotBlank(message = "Password is mandatory")
     private String password;
+
+    @OneToMany(mappedBy = "creatorUser", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    private Set<Offer> offerSet;
 
     public Long getId() {
         return id;
@@ -76,5 +79,13 @@ public class User {
     }
 
     public void setId() {
+    }
+
+    public Set<Offer> getOfferSet() {
+        return offerSet;
+    }
+
+    public void setOfferSet(Set<Offer> offerSet) {
+        this.offerSet = offerSet;
     }
 }
