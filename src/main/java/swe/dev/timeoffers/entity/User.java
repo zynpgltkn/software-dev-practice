@@ -28,6 +28,8 @@ public class User {
     @OneToMany(mappedBy = "creatorUser", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private Set<Offer> offerSet;
 
+    private String geoLocation;
+
     public Long getId() {
         return id;
     }
@@ -87,5 +89,13 @@ public class User {
 
     public void setOfferSet(Set<Offer> offerSet) {
         this.offerSet = offerSet;
+    }
+
+    public String getGeoLocation() {
+        return geoLocation;
+    }
+
+    public void setGeoLocation(String geoLocation) {
+        this.geoLocation = geoLocation;
     }
 }
