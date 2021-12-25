@@ -22,6 +22,12 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
+    @GetMapping("/")
+    public String showUserList(Model model) {
+        model.addAttribute("users", userRepository.findAll());
+        return "index";
+    }
+
     @GetMapping("/signup")
     public String showSignUpForm(User user){
 
@@ -40,11 +46,7 @@ public class UserController {
         return "redirect:/index";
     }
 
-    @GetMapping("/index")
-    public String showUserList(Model model) {
-        model.addAttribute("users", userRepository.findAll());
-        return "index";
-    }
+
 
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
