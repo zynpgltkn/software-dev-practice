@@ -30,7 +30,6 @@ public class UserController {
 
     @GetMapping("/signup")
     public String showSignUpForm(User user){
-
         return "add-user";
     }
 

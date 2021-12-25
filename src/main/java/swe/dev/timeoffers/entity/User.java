@@ -2,6 +2,7 @@ package swe.dev.timeoffers.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.awt.*;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,13 @@ public class User {
 
     @NotBlank(message = "Password is mandatory")
     private String password;
+
+    private String description;
+
+    @Column(nullable = true, length = 64)
+    private String profilePicture;
+
+    private String photosImagePath;
 
     @OneToMany(mappedBy = "creatorUser", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private Set<Offer> offerSet;
@@ -97,5 +105,30 @@ public class User {
 
     public void setGeoLocation(String geoLocation) {
         this.geoLocation = geoLocation;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture, String uploadDir) {
+        this.profilePicture = profilePicture;
+        setPhotosImagePath(uploadDir + "/" + profilePicture);
+    }
+
+    public String getPhotosImagePath() {
+        return photosImagePath;
+    }
+
+    public void setPhotosImagePath(String photosImagePath) {
+        this.photosImagePath = photosImagePath;
     }
 }
