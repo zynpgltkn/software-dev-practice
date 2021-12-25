@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -11,6 +12,7 @@ import swe.dev.timeoffers.entity.User;
 import swe.dev.timeoffers.repository.UserRepository;
 import swe.dev.timeoffers.util.FileUploadUtil;
 
+import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
@@ -56,4 +58,25 @@ public class UserProfileController {
 
         return "redirect:/welcomeprofile";
     }
+
+    @PostMapping("/editdescription/{id}")
+    public String editProfileDescription(@PathVariable("id") long id, Model model){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+
+        model.addAttribute("singleUser", user);
+        return "edituserdescription";
+    }
+
+    @RequestMapping("/submitnewdescription/{id}")
+    public String saveNewDescription(@PathVariable("id") long id, @Valid User user,
+                                     BindingResult result, Model model){
+        User userfromdb = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        userfromdb.setDescription(user.getDescription());
+        userRepository.save(userfromdb);
+
+    return "redirect:/welcomeprofile";
+    }
+
 }
