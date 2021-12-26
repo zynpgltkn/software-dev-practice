@@ -28,6 +28,12 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping("/index")
+    public String showUserLista(Model model) {
+        model.addAttribute("users", userRepository.findAll());
+        return "index";
+    }
+
     @GetMapping("/signup")
     public String showSignUpForm(User user){
         return "add-user";
@@ -42,10 +48,8 @@ public class UserController {
         user.setId(123);
         userRepository.save(user);
 
-        return "redirect:/index";
+        return "redirect:/";
     }
-
-
 
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {

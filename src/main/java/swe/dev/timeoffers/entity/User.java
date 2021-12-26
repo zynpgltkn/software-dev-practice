@@ -31,12 +31,16 @@ public class User {
     @Column(nullable = true, length = 64)
     private String profilePicture;
 
+
     private String photosImagePath;
 
     @OneToMany(mappedBy = "creatorUser", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private Set<Offer> offerSet;
 
-    private String geoLocation;
+    private Long latitude;
+    private Long longitude;
+
+    private Integer time;
 
     public Long getId() {
         return id;
@@ -50,6 +54,7 @@ public class User {
         setLastName(lastName);
         setEmail(email);
         setPassword(password);
+        setTime(5);
     }
 
     public String getFirstName() {
@@ -99,13 +104,6 @@ public class User {
         this.offerSet = offerSet;
     }
 
-    public String getGeoLocation() {
-        return geoLocation;
-    }
-
-    public void setGeoLocation(String geoLocation) {
-        this.geoLocation = geoLocation;
-    }
 
     public String getDescription() {
         return description;
@@ -130,5 +128,29 @@ public class User {
 
     public void setPhotosImagePath(String photosImagePath) {
         this.photosImagePath = photosImagePath;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
+
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
+    public Long getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Long longitude) {
+        this.longitude = longitude;
     }
 }
