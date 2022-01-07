@@ -24,6 +24,7 @@ public class User {
 
     @NotBlank(message = "Password is mandatory")
     private String password;
+    private String matchingPassword;
 
     private String description;
 
@@ -48,12 +49,18 @@ public class User {
     public User(){
     }
 
+    public void setDefaults(){
+        setTime(5);
+        setProfilePicture("icon.jpeg","uploads");
+    }
+
     public User(String firstName, String lastName, String email, String password) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         setPassword(password);
         setTime(5);
+        setProfilePicture("icon.jpeg","uploads");
     }
 
     public String getFirstName() {
@@ -151,5 +158,13 @@ public class User {
 
     public void setLongitude(Long longitude) {
         this.longitude = longitude;
+    }
+
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
+
+    public void setMatchingPassword(String matchingPassword) {
+        this.matchingPassword = matchingPassword;
     }
 }

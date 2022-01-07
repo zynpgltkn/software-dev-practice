@@ -1,7 +1,6 @@
 package swe.dev.timeoffers.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -20,15 +19,16 @@ import java.io.IOException;
 public class UserProfileController {
     private UserRepository userRepository;
 
-
     @Autowired
     public UserProfileController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/welcomeprofile")
-    public String showUserProfile(Model model) {
-        model.addAttribute("singleUser", userRepository.findByEmail("zey@nep.com"));
+    @GetMapping("/welcomeprofile/{id}")
+    public String showUserProfile(@PathVariable("id") long id, Model model) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+
+        model.addAttribute("singleUser", user);
 
         return "welcomeprofile";
     }
@@ -59,7 +59,7 @@ public class UserProfileController {
 
         model.addAttribute("singleUser", user);
 
-        return "redirect:/welcomeprofile";
+        return "redirect:/welcomeprofile/"+user.getId();
     }
 
     @PostMapping("/editdescription/{id}")
@@ -79,7 +79,7 @@ public class UserProfileController {
         userfromdb.setDescription(user.getDescription());
         userRepository.save(userfromdb);
 
-    return "redirect:/welcomeprofile";
+    return "redirect:/welcomeprofile/"+userfromdb.getId();
     }
 
 }

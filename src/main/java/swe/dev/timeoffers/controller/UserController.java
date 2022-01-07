@@ -1,6 +1,7 @@
 package swe.dev.timeoffers.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,31 +25,37 @@ public class UserController {
 
     @GetMapping("/")
     public String showUserList(Model model) {
-        model.addAttribute("users", userRepository.findAll());
         return "index";
     }
 
-    @GetMapping("/index")
+    @GetMapping("/listofusers")
     public String showUserLista(Model model) {
         model.addAttribute("users", userRepository.findAll());
-        return "index";
+
+        return "listofusers";
     }
 
-    @GetMapping("/signup")
-    public String showSignUpForm(User user){
-        return "add-user";
+    @GetMapping("/register")
+    public String showSignUpForm(Model model){
+        User newUser = new User();
+        model.addAttribute("newUser",newUser);
+        return "register";
     }
 
-    @PostMapping("/adduser")
-    public String addUser(@Valid User user, BindingResult result, Model model) {
+    @PostMapping("/register")
+    public String addUser(@Valid User newUser, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "add-user";
+            return "register";
         }
 
-        user.setId(123);
-        userRepository.save(user);
+        newUser.setDefaults();
 
-        return "redirect:/";
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(newUser.getPassword());
+        newUser.setPassword(encodedPassword);
+
+        userRepository.save(newUser);
+        return "redirect:/welcomeprofile/"+newUser.getId();
     }
 
     @GetMapping("/edit/{id}")

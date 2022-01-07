@@ -3,6 +3,7 @@ package swe.dev.timeoffers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import swe.dev.timeoffers.entity.Offer;
 import swe.dev.timeoffers.entity.User;
 import swe.dev.timeoffers.exception.UserAlreadyExistException;
@@ -10,7 +11,7 @@ import swe.dev.timeoffers.repository.OfferRepository;
 import swe.dev.timeoffers.repository.UserRepository;
 import swe.dev.timeoffers.service.UserService;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class TimeOffersWebApplication {
 
     private static UserRepository userRepository;
@@ -27,6 +28,9 @@ public class TimeOffersWebApplication {
 
         SpringApplication.run(TimeOffersWebApplication.class, args);
 
+        return;/*
+        System.exit(0);
+
         User moss = new User("Maurice", "Moss", "maurice@gmail.com", "MauriceMock");
         userRepository.save(moss);
         userRepository.save(new User("Santino", "Briggs", "santino@gmail.com", "SantinoMock"));
@@ -42,7 +46,7 @@ public class TimeOffersWebApplication {
         userRepository.save(new User("Miriam", "Roman", "miriam@gmail.com", "MiriamMock"));
 
         offerRepository.save(new Offer(moss, "Learn FRP from the Dungeon Master", "I am a seasoned Dungeon Master and I will teach you your brand new life long hobby.", 3, "111"));
-
+*/
     }
 
 }

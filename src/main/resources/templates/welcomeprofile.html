@@ -9,6 +9,9 @@
 </head>
 <body>
 <div th:replace="fragments/topnav :: navbar"></div>
+<div th:if="${message}">
+  <h4 th:text="${message}"/>
+</div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-4">
@@ -19,9 +22,7 @@
         <div th:if="${singleUser.photosImagePath}">
           <img th:src="@{'/' + ${singleUser.photosImagePath}}" class="img-responsive" style="max-height:75px;width:130px;">
         </div>
-        <div th:if="${message}">
-          <h2 th:text="${message}"/>
-        </div>
+
         <div class="col-md-6 mt-5">
           <input type="submit" class="btn btn-primary" value="Edit Profile Picture">
         </div>
@@ -53,7 +54,7 @@
       </div>
     </div>
   </div>
-  <!--
+
   <div class="row">
     <div class="col-md-12">
       <h3>
@@ -93,9 +94,9 @@
       </div>
     </div>
   </div>
-  -->
+
 </div>
-<!--
+
 <div class="row">
  <div class="col-md-4">
    <h2>
@@ -132,6 +133,6 @@
  </div>
 </div>
 
--->
+
 </body>
 </html>
