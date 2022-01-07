@@ -2,7 +2,6 @@ package swe.dev.timeoffers.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.awt.*;
 import java.util.Set;
 
 @Entity
@@ -28,7 +27,7 @@ public class User {
 
     private String description;
 
-    @Column(nullable = true, length = 64)
+    @Column(length = 64)
     private String profilePicture;
 
 

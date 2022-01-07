@@ -22,7 +22,16 @@ public class Offer {
     @JoinColumn(name = "user_id", nullable = false)
     private User creatorUser;
 
+    public Offer(User creatorUser, String offerTitle, String offerDescription, Integer offerTimeAmount, String geoLocation) {
+        this.creatorUser = creatorUser;
+        this.offerTitle = offerTitle;
+        this.offerDescription = offerDescription;
+        this.offerTimeAmount = offerTimeAmount;
+        this.geoLocation = geoLocation;
+    }
+
     public Offer() {
+
     }
 
     public String getOfferTitle() {

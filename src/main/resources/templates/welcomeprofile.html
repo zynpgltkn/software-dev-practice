@@ -1,22 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel='stylesheet' type='text/css'
-        href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.63.0/maps/maps.css'>
-  <style>
-    #map {
-      width: 100vw;
-      height: 100vh;
-    }
-  </style>
-  <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.63.0/maps/maps-web.min.js'></script>
-
 </head>
 <body>
 <div th:replace="fragments/topnav :: navbar"></div>
@@ -28,7 +17,7 @@
       </h3>
       <form th:action="@{/uploadprofilepic/{id}(id=${singleUser.id})}" th:object="${singleUser}" method="post" enctype="multipart/form-data">
         <div th:if="${singleUser.photosImagePath}">
-          <img th:src="@{'/' + ${singleUser.photosImagePath}}" class="img-responsive">
+          <img th:src="@{'/' + ${singleUser.photosImagePath}}" class="img-responsive" style="max-height:75px;width:130px;">
         </div>
         <div th:if="${message}">
           <h2 th:text="${message}"/>
@@ -43,29 +32,28 @@
     <div class="col-md-4">
       <div class="jumbotron">
         <form th:action="@{/editdescription/{id}(id=${singleUser.id})}" th:object="${singleUser}" method="post">
-
         <p>
           <span th:text="${singleUser.description}" />
         </p>
+         <!-- <div id="map"></div>-->
         <div class="col-md-6 mt-5">
-          <input type="submit" class="btn btn-primary" value="Edit Profile Description">
+          <input type="submit" class="btn btn-primary" value="Edit">
         </div>
         </form>
     </div>
     </div>
     <div class="col-md-4">
       <div class="jumbotron">
-      <span class="badge badge-info">Label</span>
-      <h3>
-        h3. Lorem ipsum dolor sit amet.
-      </h3>
-      <address>
-        <strong>Twitter, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
-      </address>
+        <div class="jumbotron">
+          <span class="badge badge-info">You have 5 credits.</span>
+          <address>
+            <strong>Home</strong><br />Atatürk mah<br /> Ataşehir 34758<br /> <abbr title="Phone">P:</abbr> (543) 502-6550
+          </address>
+        </div>
       </div>
-      <div id="map"></div>
     </div>
   </div>
+  <!--
   <div class="row">
     <div class="col-md-12">
       <h3>
@@ -105,7 +93,45 @@
       </div>
     </div>
   </div>
+  -->
+</div>
+<!--
+<div class="row">
+ <div class="col-md-4">
+   <h2>
+     Heading
+   </h2>
+   <p>
+     Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+   </p>
+   <p>
+     <a class="btn" href="#">View details »</a>
+   </p>
+ </div>
+ <div class="col-md-4">
+   <h2>
+     Heading
+   </h2>
+   <p>
+     Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+   </p>
+   <p>
+     <a class="btn" href="#">View details »</a>
+   </p>
+ </div>
+ <div class="col-md-4">
+   <h2>
+     Heading
+   </h2>
+   <p>
+     Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+   </p>
+   <p>
+     <a class="btn" href="#">View details »</a>
+   </p>
+ </div>
 </div>
 
+-->
 </body>
 </html>
