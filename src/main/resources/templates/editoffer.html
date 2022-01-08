@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="page-header">
-                <h3>Welcome, Enter The Details of the Offer / Event </h3>
+                <h3>Welcome, Edit The Details of the Offer / Event </h3>
             </div>
         </div>
     </div>
@@ -21,8 +21,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="jumbotron">
-
-                <form action="#" th:action="@{/createoffer/{id}(id=${userId})}" th:object="${newOffer}" method="post" enctype="multipart/form-data">
+                <form action="#" th:action="@{/editoffer/{id}(id=${singleOffer.id})}" th:object="${singleOffer}" method="post" enctype="multipart/form-data">
                     <div>
                         <div class="container-fluid">
                             <div class="row">
@@ -51,7 +50,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <input type="text" th:field="${newOffer.offerTitle}" class="form-control" id="offerTitle" placeholder="offerTitle">
+                                        <input type="text" th:field="${singleOffer.offerTitle}" class="form-control" id="offerTitle" placeholder="offerTitle">
                                     </div>
                                     <div class="col-md-4">
                                     </div>
@@ -68,7 +67,7 @@
 
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <textarea type="text" th:field="${newOffer.offerDescription}"></textarea>
+                                        <textarea type="text" th:field="${singleOffer.offerDescription}"></textarea>
                                     </div>
                                     <div class="col-md-4">
                                     </div>
@@ -84,7 +83,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-8" >
-                                        <input type="file"  name="image" accept="image/png, image/jpeg"/>
+                                        <input type="file" name="image" accept="image/png, image/jpeg" />
                                     </div>
                                     <div class="col-md-4">
                                     </div>
@@ -101,7 +100,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <input type="date" th:field="${newOffer.startDate}">
+                                        <input type="date" th:field="${singleOffer.startDate}">
                                     </div>
                                     <div class="col-md-4">
 
@@ -117,8 +116,8 @@
                             <td style="alignment: left">
                                 <div class="container-fluid">
                                     <div class="row">
-                                         <div class="col-md-4">
-                                            <select class="browser-default custom-select" th:field="${newOffer.startTime}">
+                                        <div class="col-md-4">
+                                            <select class="browser-default custom-select" th:field="${singleOffer.startTime}">
                                                 <option value="0">00</option>
                                                 <option value="1">01</option>
                                                 <option value="2">02</option>
@@ -166,8 +165,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <select class="browser-default custom-select" th:field="${newOffer.offerTimeAmount}">
-                                                <option value="0">0</option>
+                                            <select class="browser-default custom-select" th:field="${singleOffer.offerTimeAmount}">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -207,6 +205,9 @@
         </div>
         <div class="col-md-4">
             <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"/>
+            <div th:if="${singleOffer.offerImagePath}">
+                <img th:src="@{'/' + ${singleOffer.offerImagePath}}" class="img-responsive" style="max-height:200px;width:300px;">
+            </div>
             <div class="jumbotron">
                 <h2>
                     Location

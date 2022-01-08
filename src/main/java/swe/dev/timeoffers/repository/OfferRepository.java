@@ -11,4 +11,5 @@ public interface OfferRepository extends CrudRepository<Offer, Long> {
     public List<Offer> findAllByCreatorUserId(Long creatorUserId);
     //public List<Offer> findAllByGeoLocation(String geoLocation);
     public List<Offer> findAll();
+    public Offer findById(long offerid);
 }

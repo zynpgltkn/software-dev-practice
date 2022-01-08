@@ -22,8 +22,7 @@ public class Offer {
     private String latitude;
     private String longitude;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date startDate;
+    private String startDate;
     private Integer startTime; //It is going to be a value out of 24.
     private Integer offerTimeAmount;
 
@@ -36,7 +35,7 @@ public class Offer {
     @JoinColumn(name = "user_id", nullable = false)
     private User creatorUser;
 
-    public Offer(User creatorUser, String offerTitle, String offerDescription, Integer offerTimeAmount, String latitude, String longitude) {
+    public Offer(User creatorUser, String offerTitle, String offerDescription, Integer offerTimeAmount, String latitude, String longitude,String startDate, Integer startTime) {
         this.creatorUser = creatorUser;
         this.offerTitle = offerTitle;
         this.offerDescription = offerDescription;
@@ -44,10 +43,27 @@ public class Offer {
         if(offerTimeAmount==0)this.isEvent=true;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.startDate = startDate;
+        this.startTime = startTime;
     }
 
-    public Offer() {
-        startDate = new Date();
+    public Offer(){
+
+    }
+
+
+    public Offer(User creatorUser) {
+        this.creatorUser = creatorUser;
+    }
+
+    public void setOfferParams(Offer off){
+        this.offerTitle = off.getOfferTitle();
+        this.offerDescription = off.getOfferDescription();
+        this.offerPicture = off.getOfferPicture();
+        this.startTime = off.getStartTime();
+        this.offerTimeAmount = off.getOfferTimeAmount();
+        if(offerTimeAmount==0)this.isEvent=true;
+        this.startDate = off.getStartDate();
     }
 
     public String getOfferTitle() {
@@ -114,11 +130,11 @@ public class Offer {
         isEvent = event;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
@@ -134,12 +150,13 @@ public class Offer {
         return offerPicture;
     }
 
-    public void setOfferPicture(String offerPicture) {
-        this.offerPicture = offerPicture;
-    }
-
     public String getOfferImagePath() {
         return offerImagePath;
+    }
+
+    public void setOfferPicture(String offerPicture, String uploadDir) {
+        this.offerPicture = offerPicture;
+        setOfferImagePath(uploadDir + "/" + offerPicture);
     }
 
     public void setOfferImagePath(String offerImagePath) {

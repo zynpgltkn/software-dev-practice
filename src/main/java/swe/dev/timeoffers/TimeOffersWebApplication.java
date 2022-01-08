@@ -46,12 +46,12 @@ public class TimeOffersWebApplication {
         userRepository.save(new User("Donovan", "Hawkins", "donovan@gmail.com", "DonovanMock",true));
         userRepository.save(new User("Miriam", "Roman", "miriam@gmail.com", "MiriamMock",true));
 
-        offerRepository.save(new Offer(moss, "Learn FRP from the Dungeon Master", "I am a seasoned Dungeon Master and I will teach you your brand new life long hobby.", 3, "40.989250", "29.138293"));
-        offerRepository.save(new Offer(moss, "Learn FRP from the Dungeon Master - Evening", "I am a seasoned Dungeon Master and I will teach you your brand new life long hobby.", 3, "40.989250", "29.138293"));
+        offerRepository.save(new Offer(moss, "Learn FRP from the Dungeon Master", "I am a seasoned Dungeon Master and I will teach you your brand new life long hobby.", 3, "40.989250", "29.138293", "2022-01-11", 13));
+        offerRepository.save(new Offer(moss, "Learn FRP from the Dungeon Master - Evening", "I am a seasoned Dungeon Master and I will teach you your brand new life long hobby.", 3, "40.989250", "29.138293","2022-01-31", 11));
 
-        offerRepository.save(new Offer(santino, "Wing Chun Beginner Lesson", "Do you want to learn Wing Chun from Sihing Santino? Join me on one-to-one sessions where we start dive into the basic forms of Wing Chun, starting with Siu Nim Tau.", 1, "40.989250", "29.138293"));
-        offerRepository.save(new Offer(santino, "Wing Chun Intermediate Lesson", "Sihing Santino here! Do you want to keep on learning with Chum Kiu? You will be practicing on 'seeking the bridge' with you and your opponent! Apply today!", 1, "40.989250", "29.138293"));
-        offerRepository.save(new Offer(alan, "Get Some Sticks and Start Hitting!", "Get your rhythm swing on! I will show you my Drum kit :). What are the parts of the drum kit? How to hold drumsticks? Start practicing your rhythm with basic rudiments.", 1, "40.989250", "29.138293"));
+        offerRepository.save(new Offer(santino, "Wing Chun Beginner Lesson", "Do you want to learn Wing Chun from Sihing Santino? Join me on one-to-one sessions where we start dive into the basic forms of Wing Chun, starting with Siu Nim Tau.", 1, "40.989250", "29.138293","2022-01-31", 19));
+        offerRepository.save(new Offer(santino, "Wing Chun Intermediate Lesson", "Sihing Santino here! Do you want to keep on learning with Chum Kiu? You will be practicing on 'seeking the bridge' with you and your opponent! Apply today!", 1, "40.989250", "29.138293","2022-01-31", 9));
+        offerRepository.save(new Offer(alan, "Get Some Sticks and Start Hitting!", "Get your rhythm swing on! I will show you my Drum kit :). What are the parts of the drum kit? How to hold drumsticks? Start practicing your rhythm with basic rudiments.", 1, "40.989250", "29.138293","2022-01-31", 13));
 
     }
 
