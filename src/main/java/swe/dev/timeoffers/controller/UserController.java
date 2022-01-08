@@ -17,6 +17,7 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     public UserController(UserRepository userRepository) {
@@ -50,7 +51,6 @@ public class UserController {
 
         newUser.setDefaults();
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(newUser.getPassword());
         newUser.setPassword(encodedPassword);
 
@@ -86,5 +86,35 @@ public class UserController {
         userRepository.delete(user);
         return "redirect:/index";
     }
+
+    @GetMapping("/login")
+    public String showLoginForm(Model model){
+        User anonUser = new User();
+        model.addAttribute("anonUser", anonUser);
+        return "/login";
+    }
+
+
+    @PostMapping("/login")
+    public String submitLoginForm(User anonUser, Model model){
+        User usr = userRepository.findByEmail(anonUser.getEmail());
+
+        if(usr == null) {
+            model.addAttribute("error", "User not found");
+            model.addAttribute("anonUser", new User());
+            return "login";
+        }
+        String encodedDbPass = usr.getPassword();
+        String anonPass = anonUser.getPassword();
+
+        if(passwordEncoder.matches(anonPass, encodedDbPass)){
+            return "redirect:/welcomeprofile/"+usr.getId();
+        }
+
+        model.addAttribute("error", "Something went wrong, try again");
+        model.addAttribute("anonUser", new User());
+        return "login";
+    }
+
 
 }

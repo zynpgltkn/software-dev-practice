@@ -4,12 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import swe.dev.timeoffers.entity.Offer;
-import swe.dev.timeoffers.entity.User;
-import swe.dev.timeoffers.exception.UserAlreadyExistException;
 import swe.dev.timeoffers.repository.OfferRepository;
 import swe.dev.timeoffers.repository.UserRepository;
-import swe.dev.timeoffers.service.UserService;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class TimeOffersWebApplication {
