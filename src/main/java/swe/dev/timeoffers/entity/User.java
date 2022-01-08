@@ -1,5 +1,7 @@
 package swe.dev.timeoffers.entity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
@@ -30,37 +32,45 @@ public class User {
 
     @Column(length = 64)
     private String profilePicture;
-
-
     private String photosImagePath;
 
     @OneToMany(mappedBy = "creatorUser", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private Set<Offer> offerSet;
 
-    private Long latitude;
-    private Long longitude;
+    private String latitude;
+    private String longitude;
 
     private Integer time;
+
+    private boolean isMock;
 
     public Long getId() {
         return id;
     }
 
     public User(){
+
     }
+
+
+
 
     public void setDefaults(){
-        setTime(5);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         setProfilePicture("icon.jpeg","uploads");
+        setLatitude("40.989250");
+        setLongitude("29.138293");
+        setTime(15);
+        if(isMock == true) this.password = passwordEncoder.encode(this.password);
     }
 
-    public User(String firstName, String lastName, String email, String password) {
+    public User(String firstName, String lastName, String email, String password, boolean isMock) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         setPassword(password);
-        setTime(5);
-        setProfilePicture("icon.jpeg","uploads");
+        this.isMock = isMock;
+        if(isMock == true) setDefaults();
     }
 
     public String getFirstName() {
@@ -92,6 +102,7 @@ public class User {
     }
 
     public void setPassword(String password) {
+
         this.password = password;
     }
 
@@ -144,19 +155,19 @@ public class User {
         this.time = time;
     }
 
-    public Long getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public Long getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
@@ -166,5 +177,13 @@ public class User {
 
     public void setMatchingPassword(String matchingPassword) {
         this.matchingPassword = matchingPassword;
+    }
+
+    public boolean isMock() {
+        return isMock;
+    }
+
+    public void setMock(boolean mock) {
+        isMock = mock;
     }
 }
